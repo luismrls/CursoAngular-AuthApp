@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, of, tap } from 'rxjs';
+import { catchError, map, of, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AuthResponse, Usuario } from '../interfaces/auth.interface';
 
@@ -34,7 +34,7 @@ export class AuthService {
           }
         }),
         map(response => response.ok),
-        catchError(err => of(false) )
+        catchError( (err: HttpErrorResponse) => of(err.error.message) )
       )
 
   }
