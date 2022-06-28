@@ -18,6 +18,28 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
+  singUp(name: string,email: string, password: string) {
+
+    const url: string = `${this.baseUrl}/auth/new`;
+    const body = { name ,email, password};
+
+    return this.http.post<AuthResponse>(url, body)
+      .pipe(
+        tap(response => {
+          if(response.ok){
+            sessionStorage.setItem('token', response.token!);
+            this._user = {
+              name: response.name!,
+              uid: response.uid!
+            }
+          }
+        }),
+        map(response => response.ok),
+        catchError( (err: HttpErrorResponse) => of(err.error.message) )
+      )
+
+  }
+
   login(email: string, password: string) {
 
     const url: string = `${this.baseUrl}/auth`;
