@@ -57,8 +57,10 @@ export class AuthService {
         }),
         catchError(() => of(false))
       )
+  }
 
-
+  logout() {
+    sessionStorage.clear();
   }
 
 
