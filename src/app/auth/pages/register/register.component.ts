@@ -21,7 +21,6 @@ export class RegisterComponent {
   });
 
   singUp() {
-    console.log(this.miFormulario.value);
     const { name, email, password } = this.miFormulario.value;
 
     this.authService.singUp(name, email, password)
