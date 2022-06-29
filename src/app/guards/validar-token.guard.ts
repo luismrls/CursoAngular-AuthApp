@@ -11,7 +11,6 @@ export class ValidarTokenGuard implements CanActivate, CanLoad {
   constructor(private authService: AuthService, private router: Router) { }
   
   canActivate(): Observable<boolean> | boolean {
-    console.log('canActive');
 
     return this.authService.validarToker().pipe(
       tap(valido => {
@@ -24,7 +23,6 @@ export class ValidarTokenGuard implements CanActivate, CanLoad {
   
   
   canLoad(): Observable<boolean> | boolean{
-    console.log('canLoad');
     return this.authService.validarToker().pipe(
       tap(valido => {
         if (!valido){
